@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anggun Nurannisa | Digital Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'float-rev 8s ease-in-out infinite',
+                        'pulse-subtle': 'pulseSubtle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        'float-rev': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(12px) rotate(3deg)' },
+                        },
+                        pulseSubtle: {
+                            '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.02)' },
+                        }
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Kustomisasi scrollbar modern */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased min-h-screen relative">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-500 z-50 transition-all duration-100" style="width: 0%"></div>
+
+    <!-- Decorative Top Background Blur Elements -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-600/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-20 right-1/4 w-96 h-96 bg-indigo-400/10 dark:bg-indigo-600/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-white/70 dark:bg-slate-900/75 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-ping"></span>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent font-mono">
+                        &lt;Anggun.N /&gt;
+                    </span>
+                </div>
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#beranda" class="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tentang Saya</a>
+                    <a href="#proyek" class="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Studi Kasus</a>
+                    <a href="#laboratorium" class="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Lab Interaktif</a>
+                    <a href="#kontak" class="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Kontak</a>
+                </div>
+                <!-- Right Controls (Theme & Menu Toggle) -->
+                <div class="flex items-center space-x-3">
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:ring-2 hover:ring-blue-500/50 dark:hover:ring-blue-400/50 transition-all" aria-label="Ganti Tema">
+                        <i id="themeIcon" class="fas fa-moon text-slate-600 dark:text-slate-300"></i>
+                    </button>
+                    <!-- Mobile Menu Trigger -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <a href="#beranda" class="block px-3 py-2 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Beranda</a>
+            <a href="#tentang" class="block px-3 py-2 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Tentang Saya</a>
+            <a href="#proyek" class="block px-3 py-2 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Studi Kasus</a>
+            <a href="#laboratorium" class="block px-3 py-2 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Lab Interaktif</a>
+            <a href="#kontak" class="block px-3 py-2 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="pt-28 pb-16 md:py-36 relative overflow-hidden flex items-center min-h-[90vh]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/50 text-blue-600 dark:text-blue-400 text-xs sm:text-sm font-semibold shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                        Mahasiswa D4 Teknik Komputer & Jaringan • PNUP
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-slate-900 dark:text-white">
+                        Halo, Saya <span class="block mt-2 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent">Anggun Nurannisa</span>
+                    </h1>
+
+                    <!-- Typing Effect Text -->
+                    <div class="h-8 flex justify-center lg:justify-start items-center text-lg sm:text-xl font-mono text-slate-600 dark:text-indigo-300">
+                        <span>Fokus pada:&nbsp;</span>
+                        <span id="typing-text" class="border-r-2 border-blue-500 dark:border-blue-400 font-bold text-blue-600 dark:text-blue-400"></span>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Senang mempelajari pengolahan data terstruktur, pengembangan aplikasi web modern, serta optimasi infrastruktur jaringan komputer. Berkomitmen untuk terus berkembang mengikuti kebutuhan industri teknologi.
+                    </p>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#proyek" class="px-6 py-3.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/25 transition-all flex items-center gap-2">
+                            Mulai Eksplorasi <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#laboratorium" class="px-6 py-3.5 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold hover:bg-slate-300 dark:hover:bg-slate-700 transition-all flex items-center gap-2 border border-slate-300/30 dark:border-slate-700">
+                            <i class="fas fa-flask text-xs"></i> Coba Lab Interaktif
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Graphic -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    <!-- Abstract Background Blur -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 rounded-full blur-2xl"></div>
+                    
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+                        <!-- Rotating Dotted Circle -->
+                        <div class="absolute inset-0 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-full animate-[spin_40s_linear_infinite]"></div>
+                        <!-- Secondary Reverse Circle -->
+                        <div class="absolute inset-8 border border-dashed border-blue-400/30 dark:border-blue-500/20 rounded-full animate-[spin_25s_linear_infinite_reverse]"></div>
+                        
+                        <!-- Floating Cards -->
+                        <div class="absolute -top-2 left-1/2 -translate-x-1/2 p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-float-slow flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400"><i class="fas fa-network-wired"></i></span>
+                            <div class="text-left">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Network Adm.</p>
+                                <p class="text-xs font-bold">VSGA 2025 Certified</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-12 -left-6 p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-float-reverse flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400"><i class="fab fa-python"></i></span>
+                            <div class="text-left">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Data Processing</p>
+                                <p class="text-xs font-bold">Python & MySQL</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-12 -right-6 p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-float-slow flex items-center gap-3">
+                            <span class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400"><i class="fas fa-code"></i></span>
+                            <div class="text-left">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Web Apps</p>
+                                <p class="text-xs font-bold">HTML/CSS/JS/Flask</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Center Core Avatar Box -->
+                        <div class="absolute inset-16 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-indigo-700 flex flex-col items-center justify-center text-white shadow-2xl overflow-hidden p-6 text-center animate-pulse-subtle">
+                            <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-2.5">
+                                <i class="fas fa-terminal text-2xl text-blue-200"></i>
+                            </div>
+                            <span class="font-bold tracking-wide text-sm sm:text-base">Anggun N.</span>
+                            <span class="text-[10px] sm:text-xs text-blue-200 font-mono">D4 TKJ 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Journey Section -->
+    <section id="tentang" class="py-20 bg-slate-100/50 dark:bg-slate-950/40 border-y border-slate-200/50 dark:border-slate-800/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider">Informasi Profil</span>
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mt-2">Tentang Saya</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Column: Biography & Background -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Siapa Anggun?</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base">
+                        Saya adalah mahasiswi program studi <strong>D4 Teknik Komputer dan Jaringan</strong> di <strong>Politeknik Negeri Ujung Pandang</strong>. Ketertarikan saya terfokus pada pengembangan integrasi sistem yang andal dan analisis data iklim yang mampu menunjang pertanian cerdas.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base">
+                        Melalui berbagai simulasi dan pengujian langsung, saya membiasakan diri merumuskan topologi, merancang solusi nirkabel antar-cabang, serta menulis kode aplikasi web interaktif yang bersih dan mudah digunakan.
+                    </p>
+                    
+                    <!-- Bio Highlights Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
+                            <div class="p-2.5 w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100">Almamater</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">D4 TKJ, Politeknik Negeri Ujung Pandang (2023 - Sekarang)</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
+                            <div class="p-2.5 w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100">Organisasi</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Departemen Dana & Usaha UKM Bahasa PNUP (2024 - 2025)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Timeline / Journey -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Milestone & Perjalanan</h3>
+                    
+                    <div class="relative pl-6 border-l-2 border-indigo-200 dark:border-indigo-950 space-y-6">
+                        <!-- Item 1 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 bg-indigo-600 dark:bg-indigo-500 rounded-full ring-4 ring-white dark:ring-slate-900"></span>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 font-mono">SEKARANG</p>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100">Studi D4 Teknik Komputer & Jaringan</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Mematangkan pemahaman teoritis dan praktikal pada pemrograman web, basis data, serta infrastruktur nirkabel metropolitan.</p>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 bg-blue-500 dark:bg-blue-400 rounded-full ring-4 ring-white dark:ring-slate-900"></span>
+                            <p class="text-xs font-bold text-blue-500 dark:text-blue-400 font-mono">2025</p>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100">VSGA Junior Network Administrator & PWE Exchange</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Meraih lisensi sertifikasi administrator jaringan sekaligus berpartisipasi aktif dalam kegiatan pertukaran bahasa internasional dengan Singapore Polytechnic.</p>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 bg-emerald-500 dark:bg-emerald-400 rounded-full ring-4 ring-white dark:ring-slate-900"></span>
+                            <p class="text-xs font-bold text-emerald-500 dark:text-emerald-400 font-mono">2024</p>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100">Departemen Dana & Usaha UKM Bahasa</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Berkolaborasi mengelola administrasi keuangan dan perencanaan usaha inovatif demi kelancaran kegiatan kebahasaan organisasi mahasiswa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section with Dynamic Filter -->
+    <section id="proyek" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider">Karya Praktis</span>
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mt-2">Studi Kasus & Proyek PBL</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Interactive Filter Tabs -->
+            <div class="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+                <button onclick="filterProjects('semua')" id="btn-filter-semua" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-blue-600 text-white shadow-sm">
+                    Semua Proyek
+                </button>
+                <button onclick="filterProjects('jaringan')" id="btn-filter-jaringan" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                    <i class="fas fa-network-wired mr-1.5"></i>Infrastruktur Jaringan
+                </button>
+                <button onclick="filterProjects('webdata')" id="btn-filter-webdata" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                    <i class="fas fa-code mr-1.5"></i>Web & Pengolahan Data
+                </button>
+            </div>
+
+            <!-- Projects Grid Container -->
+            <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 (Jaringan) -->
+                <div data-category="jaringan" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-700/60 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-b border-slate-100 dark:border-slate-700/30 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-mono">Wireless MAN</span>
+                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                                Implementasi Jaringan Wireless MAN Integrasi Kantor Cabang
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
+                                Merancang konektivitas data handal antar beberapa cabang bisnis dalam satu wilayah kota guna meningkatkan stabilitas dan efisiensi pengiriman data internal harian.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">MikroTik</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">Ubiquiti</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">MAN</span>
+                            </div>
+                            <button onclick="openProjectModal('project-man')" class="text-sm font-semibold text-blue-600 dark:text-blue-400 inline-flex items-center gap-1 hover:gap-2 transition-all">
+                                Baca Pembahasan <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 (Web & Data) -->
+                <div data-category="webdata" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-700/60 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-b border-slate-100 dark:border-slate-700/30 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-mono">Web Predictor</span>
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                                Web Prediksi Hortikultura Berbasis Analisis Iklim Wilayah
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
+                                Mengembangkan sistem keputusan pencocokan tanaman hortikultura terbaik dengan memproses parameter iklim menggunakan Python, Flask, dan database MySQL.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">Python Flask</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">MySQL</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">Maps API</span>
+                            </div>
+                            <button onclick="openProjectModal('project-climate')" class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 inline-flex items-center gap-1 hover:gap-2 transition-all">
+                                Baca Pembahasan <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 (Jaringan) -->
+                <div data-category="jaringan" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-700/60 overflow-hidden group hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-br from-amber-500/10 to-orange-500/10 border-b border-slate-100 dark:border-slate-700/30 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">RF Heatmap</span>
+                        <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                                Perancangan & Optimasi Wi-Fi Berbasis Site Survey Heatmap
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
+                                Menganalisis ketidakmerataan cakupan gelombang nirkabel di ruangan perkantoran padat dan menentukan peletakan posisi Access Point optimal menggunakan Ekahau.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">Ekahau</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">RF Survey</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-700">Heatmap</span>
+                            </div>
+                            <button onclick="openProjectModal('project-wifi')" class="text-sm font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 hover:gap-2 transition-all">
+                                Baca Pembahasan <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Lab Section with SVG visual cues -->
+    <section id="laboratorium" class="py-20 bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider">Laboratorium Pembelajaran</span>
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mt-2">Uji Eksperimen Interaktif</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Dapatkan gambaran simulasi atas teori-teori teknologi yang saya gunakan pada proyek perkuliahan secara langsung di bawah ini.</p>
+                <div class="h-1 w-20 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Tab Switchers -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 inline-flex shadow-sm">
+                    <button onclick="switchLabTab('tab-network')" id="btn-tab-network" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-blue-600 text-white shadow-sm">
+                        <i class="fas fa-network-wired mr-2"></i>Link Budget & Ping
+                    </button>
+                    <button onclick="switchLabTab('tab-climate')" id="btn-tab-climate" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i class="fas fa-chart-bar mr-2"></i>Kesesuaian Pertanian (SVG Live)
+                    </button>
+                </div>
+            </div>
+
+            <!-- LAB 1: NETWORKING & PING SIMULATOR -->
+            <div id="tab-network" class="space-y-6">
+                <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Control Column -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-white">Simulator Link Budgeting Jaringan</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Sesuaikan target cabang & kekuatan daya pancar (Transmit Power) Ubiquiti PowerBeam Anda.</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Cabang Select -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Pilih Kantor Cabang</label>
+                                <select id="network-target" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="cabang-a">Cabang Utara (Jarak: 3 KM, Loss Rendah)</option>
+                                    <option value="cabang-b">Cabang Selatan (Jarak: 7 KM, Loss Menengah)</option>
+                                    <option value="cabang-c">Cabang Timur (Jarak: 12 KM, Loss Tinggi)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tx Power Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Transmit Power (Daya)</label>
+                                    <span id="tx-power-val" class="font-mono text-sm font-bold text-blue-600 dark:text-blue-400">15 dBm</span>
+                                </div>
+                                <input type="range" id="tx-power" min="5" max="25" value="15" class="w-full accent-blue-600 h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer dark:bg-slate-800">
+                            </div>
+
+                            <!-- Ping Trigger -->
+                            <button onclick="runPingSimulation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-2">
+                                <i class="fas fa-play text-xs"></i> Kirim Sinyal & Jalankan Ping
+                            </button>
+                        </div>
+
+                        <!-- Live Metrics -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Hasil Analisis Sinyal (Real-Time):</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Kekuatan Sinyal (RSSI)</span>
+                                    <span id="calc-rssi" class="font-mono font-bold text-lg text-emerald-500">-62 dBm</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Rekomendasi Lebar Bandwidth</span>
+                                    <span id="calc-throughput" class="font-mono font-bold text-lg text-slate-800 dark:text-slate-100">150 Mbps</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topology Visualization Map -->
+                    <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800/50 flex flex-col justify-between min-h-[380px] relative overflow-hidden">
+                        
+                        <!-- Visual Toplogy Canvas -->
+                        <div class="relative w-full flex-grow flex items-center justify-between px-6 z-10 py-6">
+                            <!-- HQ Router -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg relative transition-transform hover:scale-105">
+                                    <i class="fas fa-building text-2xl"></i>
+                                    <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-green-500"></span>
+                                    </span>
+                                </div>
+                                <span class="text-xs font-bold mt-2 font-mono">HQ PNUP</span>
+                            </div>
+
+                            <!-- Interactive Beam Wave (SVG) -->
+                            <div class="flex-grow mx-4 relative h-16 flex items-center justify-center">
+                                <svg class="w-full h-12" overflow="visible">
+                                    <path id="svg-wave-path" d="M 0,24 Q 50,0 100,24 T 200,24 T 300,24" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="5,5" class="animate-[dash_2s_linear_infinite]" />
+                                </svg>
+                                <div id="sim-wifi-wave" class="absolute text-blue-500 text-lg bg-white dark:bg-slate-950 p-1.5 rounded-full shadow-sm border border-slate-200/50 dark:border-slate-800/50">
+                                    <i class="fas fa-wifi animate-pulse"></i>
+                                </div>
+                            </div>
+
+                            <!-- Target Node Router -->
+                            <div class="flex flex-col items-center">
+                                <div id="target-icon-box" class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg transition-all hover:scale-105 relative">
+                                    <i id="target-icon" class="fas fa-store text-2xl"></i>
+                                    <div id="target-status-dot" class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white dark:border-slate-900 transition-colors"></div>
+                                </div>
+                                <span id="target-name" class="text-xs font-bold mt-2 font-mono">Cabang Utara</span>
+                            </div>
+                        </div>
+
+                        <!-- MicroTik Style Output Log Terminal -->
+                        <div class="bg-slate-900 text-slate-300 rounded-xl p-4 font-mono text-xs space-y-1.5 border border-slate-800 shadow-inner">
+                            <div class="flex justify-between items-center text-slate-500 border-b border-slate-800 pb-1.5 mb-1.5">
+                                <span>ROUTEROS @ ANGGUN-NETW-GW</span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            </div>
+                            <div id="terminal-content" class="h-24 overflow-y-auto space-y-1 text-slate-400">
+                                <p class="text-slate-500">&gt; Masukkan parameter dan klik 'Kirim Sinyal' untuk mendiagnosis...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAB 2: CLIMATE & HORTICULTURE CALCULATOR WITH LIVE GROWING PLANT SVG -->
+            <div id="tab-climate" class="hidden space-y-6">
+                <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Config Controls -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 dark:text-white">Kalkulator Kesesuaian Iklim Tanaman</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Ubah variabel iklim dan saksikan pertumbuhan daun/buah tanaman berubah secara otomatis berdasarkan kalkulasi kecocokan model Python.</p>
+                        </div>
+
+                        <!-- Control Parameters Form -->
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Suhu Lingkungan</label>
+                                    <span id="lbl-temp" class="font-mono text-sm font-bold text-indigo-600 dark:text-indigo-400">25 &deg;C</span>
+                                </div>
+                                <input type="range" id="input-temp" min="10" max="40" value="25" class="w-full accent-indigo-600 h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer dark:bg-slate-800">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Kelembaban Udara (RH)</label>
+                                    <span id="lbl-humidity" class="font-mono text-sm font-bold text-indigo-600 dark:text-indigo-400">60%</span>
+                                </div>
+                                <input type="range" id="input-humidity" min="20" max="100" value="60" class="w-full accent-indigo-600 h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer dark:bg-slate-800">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Curah Hujan Tahunan</label>
+                                    <span id="lbl-rain" class="font-mono text-sm font-bold text-indigo-600 dark:text-indigo-400">1500 mm</span>
+                                </div>
+                                <input type="range" id="input-rain" min="500" max="4000" value="1500" step="100" class="w-full accent-indigo-600 h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer dark:bg-slate-800">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Prediction Output and Live Reacting Plant -->
+                    <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800/50 flex flex-col justify-between min-h-[380px] space-y-6">
+                        
+                        <!-- Plant Visualization Stage -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center flex-grow">
+                            <!-- Live SVG Chili -->
+                            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col items-center relative group shadow-sm">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Budidaya Cabai Merah</p>
+                                <span id="chili-status-tag" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 mb-4">Sangat Sesuai</span>
+                                
+                                <!-- Live Plant SVG -->
+                                <svg class="w-24 h-24 transition-transform duration-500" viewBox="0 0 100 100">
+                                    <!-- Soil / Pot -->
+                                    <path d="M 35,85 L 65,85 L 70,95 L 30,95 Z" fill="#8B4513" />
+                                    <!-- Stem (Grows based on score) -->
+                                    <path id="plant-chili-stem" d="M 50,85 C 45,65 55,45 50,25" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round" />
+                                    <!-- Leaves -->
+                                    <path id="plant-chili-leaf1" d="M 50,65 C 35,60 30,45 48,55" fill="#15803d" />
+                                    <path id="plant-chili-leaf2" d="M 50,45 C 65,40 70,25 52,35" fill="#15803d" />
+                                    <!-- Pepper fruit -->
+                                    <path id="plant-chili-fruit" d="M 48,55 C 45,70 35,70 38,75" fill="#ef4444" stroke="#dc2626" stroke-width="1.5" />
+                                </svg>
+                                
+                                <div class="w-full mt-4">
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono">
+                                        <span>Kesesuaian:</span>
+                                        <span id="chili-pct" class="font-bold text-emerald-500">85%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="chili-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live SVG Potato -->
+                            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex flex-col items-center relative group shadow-sm">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Budidaya Kentang</p>
+                                <span id="potato-status-tag" class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-600 mb-4">Cukup Sesuai</span>
+                                
+                                <!-- Live Plant SVG -->
+                                <svg class="w-24 h-24 transition-transform duration-500" viewBox="0 0 100 100">
+                                    <!-- Soil / Pot -->
+                                    <path d="M 35,85 L 65,85 L 70,95 L 30,95 Z" fill="#8B4513" />
+                                    <!-- Stem (Grows based on score) -->
+                                    <path id="plant-potato-stem" d="M 50,85 C 53,70 47,55 50,35" fill="none" stroke="#22c55e" stroke-width="4.5" stroke-linecap="round" />
+                                    <!-- Broad Potato Leaves -->
+                                    <path id="plant-potato-leaf1" d="M 50,70 C 35,75 30,55 48,65" fill="#166534" />
+                                    <path id="plant-potato-leaf2" d="M 50,50 C 65,55 68,35 52,45" fill="#166534" />
+                                </svg>
+                                
+                                <div class="w-full mt-4">
+                                    <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono">
+                                        <span>Kesesuaian:</span>
+                                        <span id="potato-pct" class="font-bold text-amber-500">40%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="potato-bar" class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expert AI Diagnosis Text -->
+                        <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900 flex items-start gap-3">
+                            <i class="fas fa-stethoscope text-blue-600 dark:text-blue-400 mt-0.5"></i>
+                            <div class="text-xs text-slate-600 dark:text-slate-300">
+                                <span class="font-bold text-slate-800 dark:text-slate-100">Kalkulasi Sistem Pakar:</span>
+                                <p id="climate-insight-text" class="mt-0.5">Suhu lingkungan optimal sangat mendukung proses fotosintesis vegetatif daun.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Achievements -->
+    <section id="sertifikat" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider">Kredensial Profesional</span>
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mt-2">Sertifikat Resmi</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Cert 1 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 flex items-start gap-4 hover:shadow-md transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-950/50 flex-shrink-0 flex items-center justify-center text-orange-600 dark:text-orange-400 text-xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">TAHUN 2025</span>
+                        <h3 class="text-lg font-bold mt-1 text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Junior Network Administrator</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Diterbitkan oleh VSGA (Vocational School Graduate Academy)</p>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Verifikasi kompetensi praktis meliputi instalasi jaringan, subnetting IPv4, dasar-dasar routing dinamis, keamanan nirkabel, dan troubleshooting koneksi fisik.</p>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 flex items-start gap-4 hover:shadow-md transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/50 flex-shrink-0 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">TAHUN 2025</span>
+                        <h3 class="text-lg font-bold mt-1 text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">PWE Language Exchange</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Singapore Polytechnic Collaboration</p>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Program kemitraan interkultural guna melatih soft-skills komunikasi teknis internasional, kolaborasi jarak jauh, serta kepemimpinan bersama civitas akademika luar negeri.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Contact & Collaboration -->
+    <section id="kontak" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold uppercase tracking-wider">Hubungan Industri</span>
+                    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Saluran Komunikasi</h2>
+                    <p class="text-slate-400 text-base leading-relaxed">
+                        Terbuka terhadap peluang kerja praktek, magang industri, riset bersama, maupun diskusi terkait infrastruktur TI. Hubungi saya melalui media resmi berikut.
+                    </p>
+
+                    <!-- Contact Details -->
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-blue-400 border border-slate-700">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase font-mono">Surat Elektronik</p>
+                                <a href="mailto:anggunnurannisa@gmail.com" class="text-sm font-semibold hover:text-blue-400 transition-colors">anggunnurannisa@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-green-400 border border-slate-700">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase font-mono">Telepon & WhatsApp</p>
+                                <a href="tel:+6288804188350" class="text-sm font-semibold hover:text-green-400 transition-colors">+62 888-0418-8350</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-purple-400 border border-slate-700">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase font-mono">Lokasi Akademik</p>
+                                <span class="text-sm font-semibold">Jalan Damai, Kampus Unhas, Makassar, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:col-span-7 bg-slate-800/80 border border-slate-700 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-6">Formulir Pesan Cepat</h3>
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Nama Anda</label>
+                                <input type="text" required id="form-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Kontak / Email</label>
+                                <input type="text" required id="form-email" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Subjek</label>
+                            <input type="text" required id="form-subject" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Isi Pesan</label>
+                            <textarea required id="form-message" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"></textarea>
+                        </div>
+                        
+                        <div id="form-status" class="hidden p-3 rounded-lg text-sm text-center"></div>
+
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Kirim Surat Digital
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="mt-16 pt-8 border-t border-slate-800 text-center text-sm text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Anggun Nurannisa. Dirancang sopan, fleksibel, dan interaktif.</p>
+                <div class="flex gap-4">
+                    <a href="mailto:anggunnurannisa@gmail.com" class="hover:text-white transition-colors"><i class="fas fa-envelope text-lg"></i></a>
+                    <a href="tel:+6288804188350" class="hover:text-white transition-colors"><i class="fas fa-phone text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STOCHASTIC CASE STUDIES DETAILS MODAL -->
+    <div id="projectModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-all">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-950 rounded-t-3xl">
+                <div>
+                    <span id="modal-category" class="text-xs font-bold font-mono text-blue-600 dark:text-blue-400 uppercase tracking-widest">KATEGORI</span>
+                    <h3 id="modal-title" class="text-xl font-bold text-slate-800 dark:text-white mt-1">Nama Proyek Proyek</h3>
+                </div>
+                <button onclick="closeProjectModal()" class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white flex items-center justify-center transition-all">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 space-y-6">
+                <!-- Visual Icon Highlight banner -->
+                <div class="p-6 rounded-2xl bg-gradient-to-tr from-indigo-500/10 to-blue-500/10 border border-slate-200/40 dark:border-slate-800/40 flex flex-col items-center justify-center text-center">
+                    <div id="modal-illustration-icon" class="w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 shadow-sm text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3 text-2xl">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <p id="modal-tagline" class="font-semibold text-sm text-slate-600 dark:text-slate-300">Penjelasan studi kasus taktis.</p>
+                </div>
+
+                <!-- Descriptive list -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-base text-slate-900 dark:text-white">Butir Analisis & Pekerjaan:</h4>
+                    <ul id="modal-bullets" class="space-y-2.5 text-slate-600 dark:text-slate-300 text-sm list-none">
+                        <!-- Dynamic list items -->
+                    </ul>
+                </div>
+
+                <!-- Technologies tag pills -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Teknologi Terkait</span>
+                    <div id="modal-tech-pills" class="flex flex-wrap gap-1.5">
+                        <!-- Dynamic pills -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex justify-end gap-3 rounded-b-3xl">
+                <button onclick="closeProjectModal()" class="px-5 py-2.5 text-sm font-semibold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-xl transition-all">
+                    Tutup Detail
+                </button>
+                <a href="#laboratorium" onclick="closeProjectModal()" class="px-5 py-2.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all">
+                    Coba di Simulator
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions Logic -->
+    <script>
+        // 1. SCROLL PROGRESS INDICATOR
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // 2. THEME CONTROLLER
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.className = 'fas fa-sun text-yellow-400';
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.className = 'fas fa-moon text-slate-600';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                themeIcon.className = 'fas fa-moon text-slate-600';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                themeIcon.className = 'fas fa-sun text-yellow-400';
+            }
+        });
+
+        // 3. MOBILE MENU TOGGLE
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 4. HERO SECTION TYPING EFFECT
+        const typingText = document.getElementById('typing-text');
+        const professions = [
+            'Web Development (Flask / JS)',
+            'Junior Network Administrator',
+            'Analisis Data Iklim (Python)',
+            'Problem Solving & Team Work'
+        ];
+        let profIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const current = professions[profIndex];
+            if (isDeleting) {
+                typingText.innerText = current.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.innerText = current.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let delay = 100;
+            if (!isDeleting && charIndex === current.length) {
+                delay = 2000; // pause on full text
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                profIndex = (profIndex + 1) % professions.length;
+                delay = 500;
+            }
+
+            setTimeout(type, delay);
+        }
+        
+        // Start typing on page load
+        type();
+
+        // 5. INTERACTIVE PROJECT FILTER
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('#projectsContainer > div');
+            const buttons = ['semua', 'jaringan', 'webdata'];
+
+            // Update Active Button CSS Style
+            buttons.forEach(btnKey => {
+                const btn = document.getElementById(`btn-filter-${btnKey}`);
+                if (btnKey === category) {
+                    btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-blue-600 text-white shadow-sm";
+                } else {
+                    btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700";
+                }
+            });
+
+            // Filter project cards logic
+            cards.forEach(card => {
+                if (category === 'semua' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 6. LAB WIDGET 1: NETWORKING & LINK BUDGET SIMULATION
+        const networkTargetSelect = document.getElementById('network-target');
+        const txPowerInput = document.getElementById('tx-power');
+        const txPowerVal = document.getElementById('tx-power-val');
+        
+        const calcRssi = document.getElementById('calc-rssi');
+        const calcThroughput = document.getElementById('calc-throughput');
+        
+        const targetIcon = document.getElementById('target-icon');
+        const targetIconBox = document.getElementById('target-icon-box');
+        const targetStatusDot = document.getElementById('target-status-dot');
+        const targetName = document.getElementById('target-name');
+        
+        const terminalContent = document.getElementById('terminal-content');
+        const svgWavePath = document.getElementById('svg-wave-path');
+
+        const targetsMetadata = {
+            'cabang-a': { name: 'Cabang Utara', distance: 3, icon: 'fa-store', baseLoss: 80 },
+            'cabang-b': { name: 'Cabang Selatan', distance: 7, icon: 'fa-warehouse', baseLoss: 95 },
+            'cabang-c': { name: 'Cabang Timur', distance: 12, icon: 'fa-industry', baseLoss: 110 }
+        };
+
+        txPowerInput.addEventListener('input', (e) => {
+            const power = parseInt(e.target.value);
+            txPowerVal.innerText = `${power} dBm`;
+            updateLinkBudgetMetrics();
+        });
+
+        networkTargetSelect.addEventListener('change', () => {
+            const selected = networkTargetSelect.value;
+            const meta = targetsMetadata[selected];
+            targetName.innerText = meta.name;
+            targetIcon.className = `fas ${meta.icon} text-2xl`;
+            updateLinkBudgetMetrics();
+        });
+
+        function updateLinkBudgetMetrics() {
+            const targetKey = networkTargetSelect.value;
+            const meta = targetsMetadata[targetKey];
+            const txPower = parseInt(txPowerInput.value);
+            
+            // Simplified Log-Distance Path Loss
+            const calculatedLoss = meta.baseLoss - (txPower * 0.4);
+            const rssiValue = Math.min(-45, Math.round(txPower + 27 - calculatedLoss));
+            
+            calcRssi.innerText = `${rssiValue} dBm`;
+            
+            if (rssiValue >= -65) {
+                calcRssi.className = "font-mono font-bold text-lg text-emerald-500";
+                calcThroughput.innerText = `${Math.round(250 + (rssiValue + 65) * 5)} Mbps`;
+                svgWavePath.setAttribute('stroke', '#10b981'); // Green
+                svgWavePath.setAttribute('stroke-width', '4.5');
+            } else if (rssiValue >= -78) {
+                calcRssi.className = "font-mono font-bold text-lg text-amber-500";
+                calcThroughput.innerText = `${Math.round(100 + (rssiValue + 78) * 3)} Mbps`;
+                svgWavePath.setAttribute('stroke', '#f59e0b'); // Yellow/Amber
+                svgWavePath.setAttribute('stroke-width', '3');
+            } else {
+                calcRssi.className = "font-mono font-bold text-lg text-rose-500";
+                calcThroughput.innerText = "1 - 10 Mbps (Drop)";
+                svgWavePath.setAttribute('stroke', '#f43f5e'); // Rose/Red
+                svgWavePath.setAttribute('stroke-width', '1.5');
+            }
+        }
+
+        // Initialize Metrics
+        updateLinkBudgetMetrics();
+
+        function runPingSimulation() {
+            const targetKey = networkTargetSelect.value;
+            const meta = targetsMetadata[targetKey];
+            const txPower = parseInt(txPowerInput.value);
+            
+            const calculatedLoss = meta.baseLoss - (txPower * 0.4);
+            const rssiValue = Math.min(-45, Math.round(txPower + 27 - calculatedLoss));
+
+            targetIconBox.className = "w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-bounce relative";
+            terminalContent.innerHTML = `<p class="text-indigo-400">[Init] Memulai ICMP Echo Request ke ${meta.name} [IP: 192.168.${meta.distance}.254]...</p>`;
+
+            setTimeout(() => {
+                let isSuccessful = rssiValue >= -78;
+                let latency = Math.round(4 + (meta.distance * 1.5) + (Math.abs(rssiValue + 40) * 0.4));
+                
+                targetIconBox.className = "w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg transition-all relative";
+                
+                if (isSuccessful) {
+                    targetIconBox.classList.add('bg-emerald-600');
+                    targetStatusDot.className = "absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white dark:border-slate-900";
+                    
+                    terminalContent.innerHTML += `
+                        <p class="text-emerald-400 font-semibold">Reply from 192.168.${meta.distance}.254: bytes=32 time=${latency}ms TTL=64</p>
+                        <p class="text-slate-300">&gt; Status Sinyal: ${rssiValue} dBm (Unggul) - Konektivitas stabil tanpa paket hilang.</p>
+                    `;
+                } else {
+                    targetIconBox.classList.add('bg-rose-600');
+                    targetStatusDot.className = "absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-white dark:border-slate-900";
+                    
+                    terminalContent.innerHTML += `
+                        <p class="text-rose-500 font-bold">Request Timed Out (RTO) - Paket data terputus di jaringan.</p>
+                        <p class="text-slate-400">&gt; Rekomendasi: Naikkan parameter Transmit Power guna meminimalkan Loss jarak jauh.</p>
+                    `;
+                }
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }, 1200);
+        }
+
+        // 7. LAB WIDGET 2: HORTICULTURE CALCULATOR WITH LIVE GROWING PLANT SVG
+        const tempInput = document.getElementById('input-temp');
+        const humidityInput = document.getElementById('input-humidity');
+        const rainInput = document.getElementById('input-rain');
+        
+        const lblTemp = document.getElementById('lbl-temp');
+        const lblHumidity = document.getElementById('lbl-humidity');
+        const lblRain = document.getElementById('lbl-rain');
+
+        const chiliPct = document.getElementById('chili-pct');
+        const chiliBar = document.getElementById('chili-bar');
+        const potatoPct = document.getElementById('potato-pct');
+        const potatoBar = document.getElementById('potato-bar');
+        
+        const chiliStatusTag = document.getElementById('chili-status-tag');
+        const potatoStatusTag = document.getElementById('potato-status-tag');
+        
+        const plantChiliStem = document.getElementById('plant-chili-stem');
+        const plantChiliLeaf1 = document.getElementById('plant-chili-leaf1');
+        const plantChiliLeaf2 = document.getElementById('plant-chili-leaf2');
+        const plantChiliFruit = document.getElementById('plant-chili-fruit');
+
+        const plantPotatoStem = document.getElementById('plant-potato-stem');
+        const plantPotatoLeaf1 = document.getElementById('plant-potato-leaf1');
+        const plantPotatoLeaf2 = document.getElementById('plant-potato-leaf2');
+
+        const climateInsightText = document.getElementById('climate-insight-text');
+
+        tempInput.addEventListener('input', (e) => { lblTemp.innerHTML = `${e.target.value} &deg;C`; calculateHorticultureMatch(); });
+        humidityInput.addEventListener('input', (e) => { lblHumidity.innerText = `${e.target.value}%`; calculateHorticultureMatch(); });
+        rainInput.addEventListener('input', (e) => { lblRain.innerText = `${e.target.value} mm`; calculateHorticultureMatch(); });
+
+        function calculateHorticultureMatch() {
+            const T = parseFloat(tempInput.value);
+            const H = parseFloat(humidityInput.value);
+            const R = parseFloat(rainInput.value);
+
+            // Simulation model formulas
+            let chiliScore = 100;
+            chiliScore -= Math.abs(T - 25) * 4; // optimum 25C
+            chiliScore -= Math.abs(H - 70) * 0.7; // optimum 70%
+            chiliScore -= Math.abs(R - 2000) * 0.015; // optimum 2000mm
+            chiliScore = Math.max(10, Math.min(100, Math.round(chiliScore)));
+
+            let potatoScore = 100;
+            potatoScore -= Math.abs(T - 17) * 5.5; // optimum 17C
+            potatoScore -= Math.abs(H - 80) * 0.8; // optimum 80%
+            potatoScore -= Math.abs(R - 2500) * 0.02; // optimum 2500mm
+            potatoScore = Math.max(10, Math.min(100, Math.round(potatoScore)));
+
+            // Update Chili HTML Tags
+            chiliPct.innerText = `${chiliScore}%`;
+            chiliBar.style.width = `${chiliScore}%`;
+            if (chiliScore >= 75) {
+                chiliStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400";
+                chiliStatusTag.innerText = "Sangat Sesuai";
+            } else if (chiliScore >= 45) {
+                chiliStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400";
+                chiliStatusTag.innerText = "Cukup Sesuai";
+            } else {
+                chiliStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400";
+                chiliStatusTag.innerText = "Tidak Sesuai";
+            }
+
+            // Update Potato HTML Tags
+            potatoPct.innerText = `${potatoScore}%`;
+            potatoBar.style.width = `${potatoScore}%`;
+            if (potatoScore >= 75) {
+                potatoStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400";
+                potatoStatusTag.innerText = "Sangat Sesuai";
+            } else if (potatoScore >= 45) {
+                potatoStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400";
+                potatoStatusTag.innerText = "Cukup Sesuai";
+            } else {
+                potatoStatusTag.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400";
+                potatoStatusTag.innerText = "Tidak Sesuai";
+            }
+
+            // --- ANIMATE SVG ELEMENTS (Live growing plants) ---
+            // STEMS
+            // Scale path coordinates according to score
+            const stemChiliY = 85 - (chiliScore * 0.5); 
+            plantChiliStem.setAttribute('d', `M 50,85 C 45,70 55,55 50,${stemChiliY}`);
+            plantChiliFruit.setAttribute('d', `M 48,${stemChiliY + 15} C 45,${stemChiliY + 30} 35,${stemChiliY + 30} 38,${stemChiliY + 35}`);
+            plantChiliLeaf1.setAttribute('d', `M 50,${stemChiliY + 20} C 35,${stemChiliY + 15} 30,${stemChiliY} 48,${stemChiliY + 10}`);
+            plantChiliLeaf2.setAttribute('d', `M 50,${stemChiliY + 10} C 65,${stemChiliY + 5} 70,${stemChiliY - 10} 52,${stemChiliY}`);
+
+            const stemPotatoY = 85 - (potatoScore * 0.5);
+            plantPotatoStem.setAttribute('d', `M 50,85 C 53,70 47,55 50,${stemPotatoY}`);
+            plantPotatoLeaf1.setAttribute('d', `M 50,${stemPotatoY + 20} C 35,${stemPotatoY + 25} 30,${stemPotatoY + 5} 48,${stemPotatoY + 15}`);
+            plantPotatoLeaf2.setAttribute('d', `M 50,${stemPotatoY + 10} C 65,${stemPotatoY + 15} 68,${stemPotatoY - 5} 52,${stemPotatoY + 5}`);
+
+            // Fruit and leaf visibility based on health
+            if (chiliScore < 45) {
+                plantChiliFruit.setAttribute('fill', '#94a3b8'); // grey / dead fruit
+                plantChiliLeaf1.setAttribute('fill', '#78350f'); // brown withered leaf
+                plantChiliLeaf2.setAttribute('fill', '#78350f');
+            } else {
+                plantChiliFruit.setAttribute('fill', '#ef4444');
+                plantChiliLeaf1.setAttribute('fill', '#15803d');
+                plantChiliLeaf2.setAttribute('fill', '#15803d');
+            }
+
+            if (potatoScore < 45) {
+                plantPotatoLeaf1.setAttribute('fill', '#78350f');
+                plantPotatoLeaf2.setAttribute('fill', '#78350f');
+            } else {
+                plantPotatoLeaf1.setAttribute('fill', '#166534');
+                plantPotatoLeaf2.setAttribute('fill', '#166534');
+            }
+
+            // Diagnose summary generator
+            let textOutput = "";
+            if (chiliScore > potatoScore) {
+                textOutput = `Suhu hangat (${T}&deg;C) dan kelembaban (${H}%) cenderung memihak pada metabolisme tanaman <strong>Cabai Merah</strong>. `;
+                if (T > 30) textOutput += "Suhu agak terlalu terik, waspadai risiko penguapan air yang tinggi.";
+            } else {
+                textOutput = `Kondisi sejuk (${T}&deg;C) didukung asupan air (${R}mm) optimal sangat sesuai untuk merangsang pertumbuhan umbi <strong>Kentang</strong>. `;
+                if (H < 50) textOutput += "Akan tetapi kelembaban udara terbilang rendah, pastikan perlindungan mulsa.";
+            }
+            climateInsightText.innerHTML = textOutput;
+        }
+
+        // Initialize Horticulture Calculation
+        calculateHorticultureMatch();
+
+        function switchLabTab(tabId) {
+            const tabNetwork = document.getElementById('tab-network');
+            const tabClimate = document.getElementById('tab-climate');
+            const btnNetwork = document.getElementById('btn-tab-network');
+            const btnClimate = document.getElementById('btn-tab-climate');
+
+            if (tabId === 'tab-network') {
+                tabNetwork.classList.remove('hidden');
+                tabClimate.classList.add('hidden');
+                btnNetwork.className = "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-blue-600 text-white shadow-sm";
+                btnClimate.className = "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+            } else {
+                tabNetwork.classList.add('hidden');
+                tabClimate.classList.remove('hidden');
+                btnClimate.className = "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-indigo-600 text-white shadow-sm";
+                btnNetwork.className = "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+            }
+        }
+
+        // 9. CASE STUDIES DETAILS MODALS POP-UPS
+        const projectModal = document.getElementById('projectModal');
+        const modalCategory = document.getElementById('modal-category');
+        const modalTitle = document.getElementById('modal-title');
+        const modalIllustrationIcon = document.getElementById('modal-illustration-icon');
+        const modalTagline = document.getElementById('modal-tagline');
+        const modalBullets = document.getElementById('modal-bullets');
+        const modalTechPills = document.getElementById('modal-tech-pills');
+
+        const projectsDetails = {
+            'project-man': {
+                category: 'Infrastruktur Jaringan',
+                title: 'Perancangan & Implementasi Jaringan Wireless MAN Cabang Bisnis',
+                icon: 'fa-network-wired text-blue-600 dark:text-blue-400',
+                tagline: 'Solusi transmisi data antar-cabang nirkabel berkinerja tinggi.',
+                techs: ['MikroTik RouterOS', 'Ubiquiti PowerBeam', 'Wireless Bridge', 'Link Budgeting', 'Ping Diagnosis'],
+                bullets: [
+                    'Merancang topologi nirkabel dengan perhitungan kekuatan sinyal terarah jarak jauh antar gedung cabang.',
+                    'Melakukan analisis teknis perhitungan line-of-sight (LoS) dan minimalisir interferensi pita lebar.',
+                    'Mengonfigurasikan fungsionalitas bandwidth limiter dinamis menggunakan platform RouterOS MikroTik.',
+                    'Menjamin proses integrasi database server internal tetap handal bebas dari masalah packet drop.'
+                ]
+            },
+            'project-climate': {
+                category: 'Web & Pengolahan Data',
+                title: 'Sistem Informasi Prediksi Hortikultura Berbasis Analisis Iklim',
+                icon: 'fa-leaf text-emerald-600 dark:text-emerald-400',
+                tagline: 'Sistem pakar analisis parameter cuaca lokal berbasis web.',
+                techs: ['Python Flask', 'MySQL Database', 'Google Maps API', 'Data Aggregation', 'Kesesuaian Pertanian'],
+                bullets: [
+                    'Mengolah parameter cuaca musiman (suhu harian rata-rata, curah hujan, tingkat kelembaban) menggunakan Python.',
+                    'Mengembangkan fungsionalitas peta sebaran budidaya tanaman hortikultura lewat Google Maps API.',
+                    'Membangun skema relasi basis data MySQL untuk pemrosesan kecocokan hidup tanaman.',
+                    'Menampilkan dashboard visual rekomendasi bagi penyuluh pertanian setempat.'
+                ]
+            },
+            'project-wifi': {
+                category: 'Infrastruktur Jaringan',
+                title: 'Optimasi Jaringan Wi-Fi Berbasis Site Survey & Heatmap',
+                icon: 'fa-wifi text-amber-600 dark:text-amber-400',
+                tagline: 'Menghilangkan blind spot nirkabel di ruangan perkantoran padat.',
+                techs: ['Ekahau Pro', 'RF Heatmap', 'Analisis Interferensi', 'Roaming Wifi', 'dBm Measurement'],
+                bullets: [
+                    'Menganalisis kekuatan rambatan sinyal (dBm) di area kerja tertutup sekat beton.',
+                    'Memetakan kontur kekuatan gelombang radio nirkabel (heatmap) menggunakan perangkat lunak Ekahau.',
+                    'Merancang rekomendasi reposisi Access Point (AP) untuk menghindari tumpang tindih channel frekuensi.',
+                    'Menguji skenario seamless roaming pada perangkat seluler di dalam kawasan kantor.'
+                ]
+            }
+        };
+
+        function openProjectModal(projectId) {
+            const data = projectsDetails[projectId];
+            if (!data) return;
+
+            modalCategory.innerText = data.category;
+            modalTitle.innerText = data.title;
+            modalIllustrationIcon.innerHTML = `<i class="fas ${data.icon}"></i>`;
+            modalTagline.innerHTML = data.tagline;
+
+            modalBullets.innerHTML = '';
+            data.bullets.forEach(bullet => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start gap-3';
+                li.innerHTML = `
+                    <span class="mt-1 text-blue-500"><i class="fas fa-check-circle"></i></span>
+                    <span>${bullet}</span>
+                `;
+                modalBullets.appendChild(li);
+            });
+
+            modalTechPills.innerHTML = '';
+            data.techs.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold font-mono';
+                span.innerText = tech;
+                modalTechPills.appendChild(span);
+            });
+
+            projectModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            projectModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                closeProjectModal();
+            }
+        });
+
+        // 10. CONTACT FORM SIMULATOR
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const formStatus = document.getElementById('form-status');
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const subject = document.getElementById('form-subject').value;
+
+            formStatus.className = "p-3 rounded-lg text-sm text-center block bg-blue-500/10 text-blue-400";
+            formStatus.innerText = 'Sedang mengirim pesan...';
+
+            setTimeout(() => {
+                formStatus.className = "p-3 rounded-lg text-sm text-center block bg-emerald-500/15 text-emerald-400";
+                formStatus.innerHTML = `👋 Halo <strong>${name}</strong>, pesan simulasi Anda dengan subjek "<strong>${subject}</strong>" terkirim ke Anggun. Balasan akan disimulasikan ke <strong>${email}</strong>. Terima kasih atas perhatian sopan Anda.`;
+                document.getElementById('contactForm').reset();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
